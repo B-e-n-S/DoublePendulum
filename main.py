@@ -86,6 +86,16 @@ if __name__ == '__main__':
         print("m2", init.m2)
         # plots
         if args.time_angles: # plots time against angles
+            prevAngleDif = 0
+            print(init.init_cond[2])
+            for i in range(1, len(phi3)):
+                
+                if round(phi3[i],3) == init.init_cond[2]: ##TODO UPDATE VALUE
+                    print(i)
+                angleDif = phi3[i] - phi3[i-1]
+                if (angleDif < 0 and prevAngleDif > 0):
+                    print(i, "phi3", phi3[i])
+                prevAngleDif = angleDif
             plt.plot(xvals, phi1, label = r'$\theta_1$')
             plt.plot(xvals, phi3, label = r'$\theta_2$')
             plt.xlabel('time (s)')
@@ -127,9 +137,9 @@ if __name__ == '__main__':
             print(end - start)
 
         if args.lyapunov_exponent: # plot running mean of lyapunov exponent
-            plt.plot(np.arange(0, lyapunov_max_t, t_step), lyapunov_means)
+            plt.plot(np.arange(0, lyapunov_max_t, t_step-1), lyapunov_means)
             plt.xlabel('time (s)')
-            plt.ylabel(r'running mean $\lambda$')
+            plt.ylabel('running mean $\lambda$')
             plt.savefig('lyapunov_running_mean.png', bbox = 'tight')
             plt.close()
     print("Work 3")
