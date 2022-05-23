@@ -31,7 +31,7 @@ parser.add_argument('--I2', metavar = 'I2', type = float, default = 1, help='Cha
 # ODE solver details
 parser.add_argument('--t_min', metavar = 't_min', type = float, default = 0, help='Change the start integration time.')
 parser.add_argument('--t_max', metavar = 't_max', type = float, default = 100, help='Change the end integration time.')
-parser.add_argument('-n', '--number', metavar = 'number', type = float, default = 1000, help='Change the number of points at which the integral is evaluated between the start and end integration time')
+parser.add_argument('-n', '--number', metavar = 'number', type = float, default = 1000000000000, help='Change the number of points at which the integral is evaluated between the start and end integration time')
 
 # lyapunov exponent
 parser.add_argument('--lyapunov', action = 'store_true', default = False, help='Calculates and prints the lyapunov exponent to the screen.')
@@ -95,6 +95,7 @@ if __name__ == '__main__':
                 angleDif = phi3[i] - phi3[i-1]
                 if (angleDif < 0 and prevAngleDif > 0):
                     print(i, "phi3", phi3[i])
+                    print("AngleDif", angleDif)
                 prevAngleDif = angleDif
             plt.plot(xvals, phi1, label = r'$\theta_1$')
             plt.plot(xvals, phi3, label = r'$\theta_2$')
